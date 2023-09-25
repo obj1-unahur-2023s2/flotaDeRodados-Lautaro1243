@@ -1,13 +1,19 @@
+import wollok.game.*
+
 class Corsa {
 	const capacidad = 4
 	const velocidad = 150
 	const peso = 1300
 	var property color = null
-	var position
-	
+	//var ultimaPosicion = position
+	 
 	method capacidad() = capacidad
 	method velocidad() = velocidad
 	method peso() = peso
+	method pasoPor(posicion)
+	method pasoPorFila(numero)
+	method recorrioFilas(lista_de_numeros)
+	
 }
 
 
@@ -56,7 +62,7 @@ class Dependencia {
 	method quitarDeFlota(rodado){flota.remove(rodado)}
 	method pesoTotalFlota() = flota.sum({rod => rod.peso()})
 	method estaBienEquipada() = flota.asSet().sum() >= 3 and flota.all({rod => rod.kilometro() > 100})
-	method capacidadTotalEnColor(color) = flota.filter({ rod => rod.color() == color }).sum({rod => rod.capacidad()})
+	method capacidadTotalEnColor(color) = flota.filter({ rod => rod.color() == color }).sum({rod => rod.capacidad()}).max(0)
 	method colorDelRodadoMasRapido() = flota.max({rod => rod.velocidad()}).color()
 	method capacidadFaltante() = empleados - flota.asSet().sum({rod => rod.capacidad()})
 	method esGrande() = empleados > 39 and flota.asSet().size() > 4
